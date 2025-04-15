@@ -24,18 +24,6 @@ A typical web application might look like this. We can use Specmatic to practice
 2. Specmatic
 3. Specmatic Beta extension (for mocking Kafka)
 
-## Run Tests
-
-This will start the specmatic stub server for domain api and kafka mock using the information in specmatic.yaml and run contract tests using Specmatic.
-1. Using gradle -
-   ```shell
-     ./gradlew test
-   ```
-2. Using docker -
-   - Start Docker Desktop
-   - Run the application `./gradlew bootRun`
-   - Run the tests `docker run --network host -v "$PWD/specmatic.yaml:/usr/src/app/specmatic.yaml" -v "$PWD/build/reports/specmatic:/usr/src/app/build/reports/specmatic"  znsio/specmatic-openapi test --port=8080 --host=host.docker.internal`
-
 # Break down each component to understand what is happening
 
 ### Prerequisites
@@ -43,19 +31,19 @@ This will start the specmatic stub server for domain api and kafka mock using th
 1. Docker Desktop
 2. Java and Gradle
 3. If you are on a Windows OS, please use PowerShell.
- 
+
 ### Start the dependent components
 
 1. Start domain api stub server
 
 ```shell
-docker run -v "$PWD/src/test/resources/specmatic.yaml:/usr/src/app/specmatic.yaml" -v "$PWD/src/test/resources/domain_service:/usr/src/app/domain_service" -p 8090:9000 znsio/specmatic-openapi stub --data /usr/src/app/domain_service
+docker run -v "$(pwd)/src/test/resources/specmatic.yaml:/usr/src/app/specmatic.yaml" -v "$(pwd)/src/test/resources/domain_service:/usr/src/app/domain_service" -p 8090:9000 znsio/specmatic-openapi stub --data /usr/src/app/domain_service
 ```
 
 2. Start Kafka stub server
 
 ```shell
-docker run -p 9092:9092 -p 2181:2181 -v "$PWD/src/test/resources/specmatic.yaml:/usr/src/app/specmatic.yaml" znsio/specmatic-kafka virtualize
+docker run -p 9092:9092 -p 2181:2181 -v "$(pwd)/src/test/resources/specmatic.yaml:/usr/src/app/specmatic.yaml" znsio/specmatic-kafka virtualize
 ```
 
 ## Start BFF Server
@@ -78,3 +66,9 @@ Your result should look like:
 ```
 
 Also observe the logs in the Specmatic HTTP Stub Server and Specmatic Kafka Mock Server.
+
+## Run Contract Tests
+
+```shell
+docker run --network host -v "$(pwd)/src/test/resources/specmatic.yaml:/usr/src/app/specmatic.yaml" -v "$(pwd)/build/reports/specmatic:/usr/src/app/build/reports/specmatic"  znsio/specmatic-openapi test --port=8080 --host=host.docker.internal
+```
