@@ -34,7 +34,7 @@ This will start the specmatic stub server for domain api and kafka mock using th
 2. Using docker -
    - Start Docker Desktop
    - Run the application `./gradlew bootRun`
-   - Run the tests `docker run --network host -v "$PWD/specmatic.yaml:/usr/src/app/specmatic.yaml" -v "$PWD/build/reports/specmatic:/usr/src/app/build/reports/specmatic"  znsio/specmatic test --port=8080 --host=host.docker.internal`
+   - Run the tests `docker run --network host -v "$PWD/specmatic.yaml:/usr/src/app/specmatic.yaml" -v "$PWD/build/reports/specmatic:/usr/src/app/build/reports/specmatic"  znsio/specmatic-openapi test --port=8080 --host=host.docker.internal`
 
 # Break down each component to understand what is happening
 
@@ -49,7 +49,7 @@ This will start the specmatic stub server for domain api and kafka mock using th
 1. Start domain api stub server
 
 ```shell
-docker run -v "$PWD/src/test/resources/specmatic.yaml:/usr/src/app/specmatic.yaml" -v "$PWD/src/test/resources/domain_service:/usr/src/app/domain_service" -p 8090:9000 znsio/specmatic stub --data /usr/src/app/domain_service
+docker run -v "$PWD/src/test/resources/specmatic.yaml:/usr/src/app/specmatic.yaml" -v "$PWD/src/test/resources/domain_service:/usr/src/app/domain_service" -p 8090:9000 znsio/specmatic-openapi stub --data /usr/src/app/domain_service
 ```
 
 2. Start Kafka stub server
