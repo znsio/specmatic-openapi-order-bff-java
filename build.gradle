@@ -29,7 +29,7 @@ jacocoTestReport {
     }
 }
 
-def specmatic_version = "2.7.6"
+def specmaticOpenApiVersion = project.property("specmaticOpenApiVersion")
 def specmaticKafkaVersion = project.property("specmaticKafkaVersion")
 
 dependencies {
@@ -41,7 +41,7 @@ dependencies {
     implementation 'javax.validation:validation-api:2.0.1.Final'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testApi "io.specmatic:junit5-support:${specmatic_version}"
+    testImplementation("io.specmatic.openapi:specmatic-openapi-min:$specmaticOpenApiVersion")
     testImplementation("io.specmatic.kafka:specmatic-kafka-min:$specmaticKafkaVersion")
     testImplementation(
             'org.assertj:assertj-core:3.24.2',
