@@ -2,7 +2,6 @@ package com.component.orders.contract
 
 import io.specmatic.kafka.Expectation
 import io.specmatic.kafka.KafkaMock
-import io.specmatic.kafka.VersionInfo
 import io.specmatic.stub.ContractStub
 import io.specmatic.stub.createStub
 import io.specmatic.test.SpecmaticContractTest
@@ -10,6 +9,8 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterAll
 import org.junit.jupiter.api.BeforeAll
 import org.springframework.boot.test.context.SpringBootTest
+import io.specmatic.kafka.VersionInfo as KafkaVersionInfo
+import io.specmatic.openapi.VersionInfo as OpenApiVersionInfo
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class ContractTests : SpecmaticContractTest {
@@ -30,7 +31,8 @@ class ContractTests : SpecmaticContractTest {
         @JvmStatic
         @BeforeAll
         fun setUp() {
-            println("Using specmatic kafka - ${VersionInfo.describe()}")
+            println("Using specmatic kafka - ${KafkaVersionInfo.describe()}")
+            println("Using specmatic openapi - ${OpenApiVersionInfo.describe()}")
             System.setProperty("host", APPLICATION_HOST)
             System.setProperty("port", APPLICATION_PORT)
             System.setProperty("endpointsAPI", ACTUATOR_MAPPINGS_ENDPOINT)

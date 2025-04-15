@@ -2,7 +2,6 @@ package com.component.orders
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.specmatic.kafka.KafkaMock
-import io.specmatic.kafka.VersionInfo
 import io.specmatic.stub.ContractStub
 import io.specmatic.stub.createStub
 import org.assertj.core.api.Assertions.assertThat
@@ -14,6 +13,8 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.*
 import java.io.File
+import io.specmatic.kafka.VersionInfo as KafkaVersionInfo
+import io.specmatic.openapi.VersionInfo as OpenApiVersionInfo
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 class ApiTests {
@@ -26,7 +27,8 @@ class ApiTests {
         @BeforeAll
         @JvmStatic
         fun setUp() {
-            println("Using specmatic kafka - ${VersionInfo.describe()}")
+            println("Using specmatic kafka - ${KafkaVersionInfo.describe()}")
+            println("Using specmatic openapi - ${OpenApiVersionInfo.describe()}")
             // Start Specmatic Http Stub
             httpStub = createStub("localhost", STUB_PORT, strict = true)
 
