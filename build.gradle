@@ -13,6 +13,9 @@ repositories {
         url uri("lib")
     }
     mavenCentral()
+    maven {
+        url = uri("https://packages.confluent.io/maven/")
+    }
     mavenLocal()
 }
 
@@ -42,7 +45,7 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation("io.specmatic.openapi:specmatic-openapi:$specmaticOpenapiVersion")
-    testImplementation("io.specmatic.kafka:specmatic-kafka-min:$specmaticKafkaVersion")
+    testImplementation("io.specmatic.kafka:specmatic-kafka:$specmaticKafkaVersion")
     testImplementation(
             'org.assertj:assertj-core:3.24.2',
             'org.junit.jupiter:junit-jupiter-api:5.10.1'
