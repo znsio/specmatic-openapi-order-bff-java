@@ -20,8 +20,6 @@ class ContractTests : SpecmaticContractTest {
         private lateinit var kafkaMock: KafkaMock
         private const val APPLICATION_HOST = "localhost"
         private const val APPLICATION_PORT = "8080"
-        private const val HTTP_STUB_HOST = "localhost"
-        private const val HTTP_STUB_PORT = 8090
         private const val KAFKA_MOCK_HOST = "localhost"
         private const val KAFKA_MOCK_PORT = 9092
         private const val ACTUATOR_MAPPINGS_ENDPOINT =
@@ -38,7 +36,7 @@ class ContractTests : SpecmaticContractTest {
             System.setProperty("endpointsAPI", ACTUATOR_MAPPINGS_ENDPOINT)
             System.setProperty("filter","PATH!=$EXCLUDED_ENDPOINTS")
             // Start Specmatic Http Stub and set the expectations
-            httpStub = createStub(listOf("./src/test/resources/domain_service"), HTTP_STUB_HOST, HTTP_STUB_PORT)
+            httpStub = createStub(listOf("./src/test/resources/domain_service"))
 
             // Start Specmatic Kafka Mock and set the expectations
             kafkaMock = KafkaMock.startInMemoryBroker(KAFKA_MOCK_HOST, KAFKA_MOCK_PORT)
